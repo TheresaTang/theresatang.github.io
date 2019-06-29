@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>variableHoisting | tang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。声明提升有两种情况需要注意： 函数声明会被提升，但是函数表达式不会原因：变量表示符被提升，但是并没有赋值，即使是具名的函数表达式，名称标示符在赋值之前也无法在作用域中使用 1234567891011121314foo () // Ty">
+  <meta name="description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使">
 <meta property="og:type" content="article">
 <meta property="og:title" content="variableHoisting">
 <meta property="og:url" content="http://yoursite.com/2019/06/29/variableHoisting/index.html">
 <meta property="og:site_name" content="tang的博客">
-<meta property="og:description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。声明提升有两种情况需要注意： 函数声明会被提升，但是函数表达式不会原因：变量表示符被提升，但是并没有赋值，即使是具名的函数表达式，名称标示符在赋值之前也无法在作用域中使用 1234567891011121314foo () // Ty">
+<meta property="og:description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-29T03:55:25.000Z">
+<meta property="og:updated_time" content="2019-06-29T04:32:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="variableHoisting">
-<meta name="twitter:description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。声明提升有两种情况需要注意： 函数声明会被提升，但是函数表达式不会原因：变量表示符被提升，但是并没有赋值，即使是具名的函数表达式，名称标示符在赋值之前也无法在作用域中使用 1234567891011121314foo () // Ty">
+<meta name="twitter:description" content="声明提升产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使">
   
     <link rel="alternative" href="/atom.xml" title="tang的博客" type="application/atom+xml">
   
@@ -58,8 +58,6 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -107,8 +105,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -123,9 +119,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -160,7 +154,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="声明提升"><a href="#声明提升" class="headerlink" title="声明提升"></a>声明提升</h2><p>产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。声明提升有两种情况需要注意：</p>
+        <h2 id="声明提升"><a href="#声明提升" class="headerlink" title="声明提升"></a>声明提升</h2><p>产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// undefind</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line"><span class="comment">//实际上会被处理成如下</span></span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line">a = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：对于let、const声明的变量不存在变量提升，必须先定义再使用<br>声明提升有两种情况需要注意：</p>
 <h3 id="函数声明会被提升，但是函数表达式不会"><a href="#函数声明会被提升，但是函数表达式不会" class="headerlink" title="函数声明会被提升，但是函数表达式不会"></a>函数声明会被提升，但是函数表达式不会</h3><p>原因：变量表示符被提升，但是并没有赋值，即使是具名的函数表达式，名称标示符在赋值之前也无法在作用域中使用</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">foo () <span class="comment">// TypeError: foo is not a function</span></span><br><span class="line">bar() <span class="comment">// ReferenceError：bar is not defined</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实际上JavaScript会把上述代码处理成以下</span></span><br><span class="line"><span class="keyword">var</span> foo</span><br><span class="line">foo () <span class="comment">// TypeError</span></span><br><span class="line">bar() <span class="comment">// ReferenceError</span></span><br><span class="line">foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bar = ...self...</span><br><span class="line"> <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -169,6 +166,9 @@
 
 <p>另外，一个普通块内的函数声明，通常会被提升到所在作用域的顶部，如下所示</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">foo() <span class="comment">// b</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">true</span></span><br><span class="line"><span class="keyword">if</span> () &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(b)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>来源参考：《你不知道的JavaScript》</p>
+
       
 
       
