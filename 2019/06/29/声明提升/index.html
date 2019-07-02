@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>tangshan的博客</title>
+  <title>variableHoisting | tangshan的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在吃的道路上越走越远...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tangshan的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使用声明提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="variableHoisting">
+<meta property="og:url" content="http://yoursite.com/2019/06/29/声明提升/index.html">
 <meta property="og:site_name" content="tangshan的博客">
-<meta property="og:description" content="在吃的道路上越走越远...">
+<meta property="og:description" content="产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使用声明提">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-02T15:22:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tangshan的博客">
-<meta name="twitter:description" content="在吃的道路上越走越远...">
+<meta name="twitter:title" content="variableHoisting">
+<meta name="twitter:description" content="产生原因：在JavaScript中，包括变量和函数在内的所有声明都会在任何代码被执行前首先处理，即变量定义会在编译阶段进行，而变量赋值是留着原地等待被执行的。即： 123456console.log(a)  // undefindvar a = 2//实际上会被处理成如下var aconsole.log(a)a = 2  注意：对于let、const声明的变量不存在变量提升，必须先定义再使用声明提">
   
     <link rel="alternative" href="/atom.xml" title="tangshan的博客" type="application/atom+xml">
   
@@ -133,91 +134,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-exports与module.exports、export与export default" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-声明提升" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/02/exports与module.exports、export与export default/">moduleInfo</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/02/exports与module.exports、export与export default/" class="archive-article-date">
-  	<time datetime="2019-07-02T15:09:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="exports与module-exports、export与export-default"><a href="#exports与module-exports、export与export-default" class="headerlink" title="exports与module.exports、export与export default"></a>exports与module.exports、export与export default</h2><h3 id="exports与module-exports"><a href="#exports与module-exports" class="headerlink" title="exports与module.exports"></a>exports与module.exports</h3><p>Node.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。<br>exports 是对module.exports的{}的引用，我们可以exports将函数和对象添加到模块的根部，他只能使用.进行添加属性，如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line">exports.a = <span class="string">'1'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// &#123;a: '1'&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：不能对exports直接赋值一个变量，这样的话直接切断了export与module.exports之间的联系，即exports不再是对module.exports的引用，而是对赋值的变量的引用，如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">'1'</span></span><br><span class="line">exports = a</span><br><span class="line"><span class="built_in">console</span>.log(exports) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 控制台输出&#123;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>当然，在对module.exports进行重新赋值，exports与，module.exports同样也会切断联系，exports引用的依旧是{}，而module.exports则指向了新的内存地址，如下所示</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span></span><br><span class="line"><span class="built_in">module</span>.exports = a</span><br><span class="line">exports.b = </span><br><span class="line"><span class="built_in">console</span>.log(exports) <span class="comment">// &#123;b: 1&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// 控制台输出1</span></span><br></pre></td></tr></table></figure>
-
-<p>require导入模块实际上是导入module.exports，所以上述代码中index.js输出的是1，使用exports添加的属性是无法访问到的。</p>
-<h3 id="export与export-default"><a href="#export与export-default" class="headerlink" title="export与export default"></a>export与export default</h3><p>在ES6中，export语句用于从模块中导出函数、对象或原始值，以便其他程序可以通过import语句使用它们。<br>他有两种导出方式分别为export(命名导出)和export default(默认导出)<br>export与export default的区别有：<br>1.每一个模块中可以有多个export导出，但是只能有一个export default导出<br>2.在导入期间，export导出的模块必须使用相应对象的相同名称。但是，可以使用任何名称导入默认导出<br>示例如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="comment">// export导出</span></span><br><span class="line"><span class="comment">//导出变量</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="string">'100'</span>;  </span><br><span class="line"> <span class="comment">//导出方法</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hi'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sing</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'everbody'</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; sing &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//b.js</span></span><br><span class="line"><span class="comment">//export default导出</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> a; </span><br><span class="line"><span class="comment">//export defult const a = 100;// 这里不能写这种格式。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; say, sing &#125; <span class="keyword">from</span> <span class="string">'./a.js'</span>; <span class="comment">//导入了 export 方法 </span></span><br><span class="line"><span class="keyword">import</span> m <span class="keyword">from</span> <span class="string">'./b.js'</span>;  <span class="comment">//导入了 export default </span></span><br><span class="line"><span class="comment">// import * from './b.js';  //export default 不能用这种方法导入</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> test <span class="keyword">from</span> <span class="string">'./a.js'</span>; <span class="comment">//as 集合成对象导入</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/02/exports与module.exports、export与export default/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-声明提升" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/29/声明提升/">variableHoisting</a>
+    <h1 class="article-title" itemprop="name">
+      variableHoisting
     </h1>
   
 
@@ -255,16 +179,79 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/29/声明提升/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/29/声明提升/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/07/02/exports与module.exports、export与export default/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          moduleInfo
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -284,8 +271,14 @@
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -308,8 +301,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
