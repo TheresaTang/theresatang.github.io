@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>moduleInfo | tangshan的博客</title>
+  <title>exports与module.exports、export与export default | tangshan的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="exports与module.exports、export与export defaultexports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。">
+  <meta name="description" content="exports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。exports 是对module.exports的{}的引用，我们可以exports将函">
 <meta property="og:type" content="article">
-<meta property="og:title" content="moduleInfo">
+<meta property="og:title" content="exports与module.exports、export与export default">
 <meta property="og:url" content="http://yoursite.com/2019/07/02/moduleInfo/index.html">
 <meta property="og:site_name" content="tangshan的博客">
-<meta property="og:description" content="exports与module.exports、export与export defaultexports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。">
+<meta property="og:description" content="exports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。exports 是对module.exports的{}的引用，我们可以exports将函">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-02T15:30:26.000Z">
+<meta property="og:updated_time" content="2019-07-05T14:01:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="moduleInfo">
-<meta name="twitter:description" content="exports与module.exports、export与export defaultexports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。">
+<meta name="twitter:title" content="exports与module.exports、export与export default">
+<meta name="twitter:description" content="exports与module.exportsNode.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。exports 是对module.exports的{}的引用，我们可以exports将函">
   
     <link rel="alternative" href="/atom.xml" title="tangshan的博客" type="application/atom+xml">
   
@@ -141,7 +141,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      moduleInfo
+      exports与module.exports、export与export default
     </h1>
   
 
@@ -154,7 +154,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="exports与module-exports、export与export-default"><a href="#exports与module-exports、export与export-default" class="headerlink" title="exports与module.exports、export与export default"></a>exports与module.exports、export与export default</h2><h3 id="exports与module-exports"><a href="#exports与module-exports" class="headerlink" title="exports与module.exports"></a>exports与module.exports</h3><p>Node.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。<br>exports 是对module.exports的{}的引用，我们可以exports将函数和对象添加到模块的根部，他只能使用.进行添加属性，如下所示：</p>
+        <h3 id="exports与module-exports"><a href="#exports与module-exports" class="headerlink" title="exports与module.exports"></a>exports与module.exports</h3><p>Node.js采用的是CommonJS模块规范，在 Node.js 模块系统中，每个文件都被视为一个独立的模块，模块内的本地变量是私有的，因为模块由 Node.js 封装在一个函数中。它采用exports、module.exports导出模块，require导入模块。<br>exports 是对module.exports的{}的引用，我们可以exports将函数和对象添加到模块的根部，他只能使用.进行添加属性，如下所示：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line">exports.a = <span class="string">'1'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a)  <span class="comment">// &#123;a: '1'&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>注意：不能对exports直接赋值一个变量，这样的话直接切断了export与module.exports之间的联系，即exports不再是对module.exports的引用，而是对赋值的变量的引用，如下所示：</p>
@@ -239,9 +239,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/07/05/scoreClosure/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          作用域与闭包
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/06/29/variableHoisting/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">variableHoisting</div>
+      <div class="article-nav-title">声明提升</div>
       <i class="icon-circle-right"></i>
     </a>
   
