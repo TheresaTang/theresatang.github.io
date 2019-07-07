@@ -75,4 +75,4 @@ for (let i = 0; i < 5; i++) {
   })(i)
 }
 ```
-参考：《你不知道的JavaScript 上卷》
+来源参考：《你不知道的JavaScript 上卷》
